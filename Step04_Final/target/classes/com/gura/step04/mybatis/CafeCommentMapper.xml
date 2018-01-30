@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cafeComment">
+	<select  id="getList" parameterType="int" 
+			resultType="cafeCommentDto">
+			SELECT num, writer, content, target_id, ref_group, comment_group,
+			regdate
+			FROM board_cafe_comment
+			WHERE ref_group=#{num} <!--  덧글 그룹 번호 -->
+			ORDER BY comment_group ASC, num ASC	 <!-- 그룹 내에서 정렬 -->
+	</select>
+	
+	<insert id="insert" parameterType="cafeCommentDto">
+		INSERT INTO board_cafe_comment
+		(num, writer, content, target_id, ref_group, comment_group,
+		regdate)
+		VALUES(#{num}, #{writer}, #{content},
+		#{target_id}, #{ref_group}, #{comment_group}, SYSDATE)
+	</insert> <!-- 글번호 num은 dto값을 읽어온다. -->
+	
+	<!--  덧글의 글번호 -->
+	<select  id="getSequence" resultType="int">
+		SELECT board_cafe_seq.NEXTVAL
+		FROM DUAL <!--  DUAL Dummy table Oracle 기본 -->
+	</select>
+	
+	<select id="getData" parameterType="cafeCommentDto"
+			resultType="cafeCommentDto">
+			SELECT 	num,writer,content,target_id,ref_group,comment_group,regdate
+			FROM board_cafe_comment
+			WHERE num=#{num}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
