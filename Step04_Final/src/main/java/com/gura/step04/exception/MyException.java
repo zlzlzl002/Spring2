@@ -4,7 +4,7 @@ package com.gura.step04.exception;
  */
 public class MyException extends Exception{
 	// 맴버필드
-	private String message="내가 정의한 Exception";
+	private String message;
 	
 	// 생성자
 	public MyException(String message){
@@ -20,6 +20,6 @@ public class MyException extends Exception{
 	@Override
 	public String getMessage() {
 		
-		return super.getMessage();
+		return message;
 	}
 }
