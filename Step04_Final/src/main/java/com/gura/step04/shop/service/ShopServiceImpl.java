@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,7 +31,8 @@ public class ShopServiceImpl implements ShopService{
 		
 		return mView;
 	}
-
+	
+	@Transactional
 	@Override
 	public ModelAndView buy(ShopDto dto) {
 		// 1. 상품의 가격정보를 얻어온다.
@@ -41,7 +43,7 @@ public class ShopServiceImpl implements ShopService{
 		// 3. 가격의 10% 를 point 로 적립한다.
 		shopDao.plusPoint(dto);
 		// 4. 재고 갯수를 -1 줄인다. 상품번호를 전달해서 제고갯수 -1
-		shopDao.minusCount(dto.getNum());
+		shopDao.minusCount(dto.getNum()); // 체크 제약 조건 
 		// 5. 배송 요청 정보를 입력한다.
 		OrderDto orderDto =new OrderDto();
 		orderDto.setId(dto.getId()); // 주문자의 아이디
