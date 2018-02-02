@@ -16,6 +16,7 @@ public class FileDaoImpl implements FileDao{
 	private SqlSession session;
 
 	@Override
+	// dto => writer,title,org,save,fileSize 정보가 들어있다.
 	public void insert(FileDto dto) {
 		session.insert("file.insert", dto);
 	}

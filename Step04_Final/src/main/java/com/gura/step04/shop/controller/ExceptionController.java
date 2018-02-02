@@ -1,6 +1,8 @@
 package com.gura.step04.shop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,5 +23,23 @@ public class ExceptionController {
 		mView.addObject("exception",me);
 		mView.setViewName("error/my");
 		return mView;	
+	}
+	
+	/*
+	 * 	DB 관련 작업도중 발생한 Exception 은 
+	 * 	DataAccessException type 으로 받을수 있다.
+	 */
+	@ExceptionHandler(DataAccessException.class)
+	public ModelAndView
+		
+		handleDateAccessException(DataAccessException dae){
+	/*	DataSourceTransactionManager txManager=
+				new DataSourceTransactionManager();
+		txManager.setDataSource(); xml=> 코드확인*/
+		
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("exception",dae);
+		mView.setViewName("error/data_access");
+		return mView;
 	}
 }

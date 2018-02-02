@@ -40,6 +40,12 @@
          <li class="nav-item">
             <a class="nav-link" href="cafe/list.do">카페 글</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Html5/Step01_Canvas.html">Canvas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Html5/Step01_CanvasImage.html">Canvas2</a>
+          </li>
 			
 		  <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>

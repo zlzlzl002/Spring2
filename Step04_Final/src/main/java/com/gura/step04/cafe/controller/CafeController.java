@@ -29,7 +29,9 @@ public class CafeController {
 		return mView;
 	}
 	
+	// Cafe 새글 작성
 	@RequestMapping("/cafe/insertform")
+	// auth 시작하면 AOP 적용
 	public ModelAndView authInsertForm(HttpServletRequest request){
 		
 		return new ModelAndView("cafe/insertform");

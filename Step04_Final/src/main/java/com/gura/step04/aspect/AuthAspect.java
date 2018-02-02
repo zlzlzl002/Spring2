@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 @Aspect
-@Component
-public class AuthAspect {
+@Component // bean
+public class AuthAspect { // 인증 관련된 Aspect
 	/*
 	 *  컨트롤러에 특정 메소드에 aop 를 적용해서 로그인 했는지
 	 *  여부를 검사를 하는 메소드
@@ -46,7 +46,7 @@ public class AuthAspect {
 					
 					mView.setViewName("redirect:/users/loginform.do?url="+url);
 					// Spring Framework 에 ModelAndView 객체를 바로 리턴
-					return mView;
+					return mView; // 로그인x   joinPoin.proceed()수행 안함
 				}
 			}
 		}

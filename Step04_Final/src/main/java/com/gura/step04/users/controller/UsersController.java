@@ -33,7 +33,7 @@ public class UsersController {
 	
 	//아이디 중복 확인 요청 처리
 	@RequestMapping("/users/checkid")
-	@ResponseBody
+	@ResponseBody // jakson
 	public Map<String, Object> checkid(@RequestParam String inputId){
 		//서비스를 이용해서 사용가능 여부를 boolean type 으로 리턴받기
 		boolean canUse=service.canUseId(inputId);
@@ -53,7 +53,7 @@ public class UsersController {
 	// 회원 가입 요청 처리
 	@RequestMapping(value="/users/signup", method=RequestMethod.POST)
 	public ModelAndView signup(@ModelAttribute UsersDto dto){
-		//전달되는 인자에 회원 가입 정보가 들어 있다. 
+		//전달되는 인자에 회원 가입 정보가 들어 있다.  // @ModelAttribute UsersDto dto
 		ModelAndView mView=service.signup(dto);
 		mView.setViewName("users/signup_result");
 		return mView;
@@ -65,8 +65,8 @@ public class UsersController {
 		// url 이라는 파라미터로 전달된 문자열 읽어오기
 		String url=request.getParameter("url");
 		if(url==null){//전달 되지 않았으면 root 요청을 하도록 
-			url=request.getContextPath()+"/";
-		}
+			url=request.getContextPath()+"/"; // context 명만
+		} 
 		//로그인후 이동할 url 정보를 ModelAndView 객체에 담고 
 		mView.addObject("url", url);
 		//view 페이지 정보를 담고 
@@ -96,8 +96,15 @@ public class UsersController {
 		mView.setViewName("users/logout_result");
 		return mView;
 	}
-		
+	
+	/*
+	 *  HttpServletRequest request => AOP 를 사용하기 위해서
+	 *  request.getSession(); session 값얻어올수 있다.
+	 */
+	
+	// 회원 info (detail)	
 	@RequestMapping("/users/info")
+	// AOP = * auth*(..) <=로그인x 필터대신
 	public ModelAndView authInfo(HttpServletRequest request){
 		//세션 객체 
 		HttpSession session=request.getSession();
@@ -124,7 +131,7 @@ public class UsersController {
 	
 	@RequestMapping("/users/update")
 	public ModelAndView authUpdate(@ModelAttribute UsersDto dto, 
-			HttpServletRequest request){
+			HttpServletRequest request){ // *AOP 사용을위해서 session 객체 추가
 		//서비스를 객체를 이용해서 수정반영
 		service.update(dto);
 		
@@ -134,7 +141,7 @@ public class UsersController {
 		return mView;
 	}
 	@RequestMapping("/users/delete")
-	public ModelAndView authDelete(HttpServletRequest request){
+	public ModelAndView authDelete(HttpServletRequest request){ // id 를 읽어와서 해도된다
 		HttpSession session=request.getSession();
 		//서비스를 이용해서 탈퇴 처리를 한다.
 		ModelAndView mView=service.delete(session);

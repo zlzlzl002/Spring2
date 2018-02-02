@@ -32,6 +32,12 @@ public class ShopServiceImpl implements ShopService{
 		return mView;
 	}
 	
+	/*
+	 *	- 트랜젝션 설정 방법
+	 *	1. pom.xml 에 spring-tx dependency 추가
+	 *	2. servlet-context.xml 에 transaction 설정 추가
+	 *	3. @Transactional 어노테이션 추가
+	 */
 	@Transactional
 	@Override
 	public ModelAndView buy(ShopDto dto) {

@@ -17,7 +17,7 @@ import com.gura.step04.file.dto.FileDto;
 public class FileServiceImpl implements FileService{
 	
 	//의존 객체
-	@Autowired
+	@Autowired // 여러개 Dao 있을수 있다
 	private FileDao fileDao;
 	
 	//한 페이지에 나타낼 로우의 갯수
@@ -69,6 +69,7 @@ public class FileServiceImpl implements FileService{
 		fileDao.insert(dto);		
 	}
 
+	// keyWord 검색 
 	@Override
 	public ModelAndView list(HttpServletRequest request) {
 		//검색과 관련된 파라미터를 읽어와 본다.
@@ -142,7 +143,7 @@ public class FileServiceImpl implements FileService{
 
 	@Override
 	public void delete(HttpServletRequest request, int num) {
-		//삭제할 파일의 정보를 얻어온다.
+		//삭제할 파일의 정보를 얻어온다. Dao를 여러번 사용 가능
 		FileDto dto=fileDao.getData(num);
 		//1. 파일 시스템에서 물리적인 삭제
 		String path=

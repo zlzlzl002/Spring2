@@ -8,11 +8,9 @@ public class FileDto {
 	private String title;
 	private String orgFileName;
 	private String saveFileName;
-	private long fileSize;
 	private String regdate;
 	private MultipartFile file; //Spring 에서 파일 업로드 처리하기 위해
-	private int startRowNum;
-	private int endRowNum;
+	
 	
 	//디폴트 생성자 
 	public FileDto(){}

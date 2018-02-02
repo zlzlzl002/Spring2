@@ -98,7 +98,7 @@ body {
 </style>
 </head>
 <body>
-    <form class="form-signin" action="login.do" method="post">
+    <form class="form-signin" action="login.do" method="post" onsubmit="return FormSubmit();">
       <input type="hidden" name="url" value="${url }"/>
       <div class="text-center mb-4">
         <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
@@ -119,12 +119,19 @@ body {
         <label>
           <input type="checkbox" id="isSave"> Remember me
         </label>
+        <div class="g-recaptcha" data-sitekey="6Le780MUAAAAAAEstmgpleGJGu0uKopxAfZhNb84"></div>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.2.1.js"></script>
-<script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
+<script>
+	
+function FormSubmit() { if (grecaptcha.getResponse() == ""){ alert("리캡챠를 체크해야 합니다."); return false; } else { return true; } }
+
+
+	
 	// localStorage 에 저장된 아이디 비밀번호가 있으면 복구시켜준다.
 	if(localStorage.id != undefined){
 		$("#id").val(localStorage.id);
